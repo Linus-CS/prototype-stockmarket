@@ -1,4 +1,4 @@
-package de.linus.prototypeStock.render.group.genaral.content;
+package de.linus.prototypeStock.render.group;
 
 import de.linus.prototypeStock.render.Window;
 import de.linus.prototypeStock.render.group.components.ComponentGroup;
@@ -14,8 +14,5 @@ public class ContentArea extends ComponentGroup {
 	protected int y = Window.HEIGHT / 7;
 
 	protected int width = Window.WIDTH;
-	protected int height = Window.HEIGHT - Window.HEIGHT / 7;
-	
-	
-	
+	protected int height = Window.HEIGHT - Window.HEIGHT / 7;	
 }

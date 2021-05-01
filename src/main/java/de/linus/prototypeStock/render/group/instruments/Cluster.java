@@ -1,11 +1,8 @@
 package de.linus.prototypeStock.render.group.instruments;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.linus.prototypeStock.render.group.components.Component;
 import de.linus.prototypeStock.render.group.components.ComponentGroup;
 
 /**
@@ -29,18 +26,7 @@ public class Cluster extends ComponentGroup {
 		this.width = width;
 		this.height = height;
 		
-		
-		// Outline
-		this.addComponent(new Component(0, this.y, this.width - 5, this.height - 35) {
-
-			@Override
-			public void render(Graphics g) {
-				g.setColor(Color.GREEN);
-				g.drawRect(x, y, width, height);
-			}
-		});
-		
-		//Instruments
+		/* Instruments */
 		int offSet = width/80;
 		int instrumentX = offSet;
 		int instrumentY = this.y + offSet;

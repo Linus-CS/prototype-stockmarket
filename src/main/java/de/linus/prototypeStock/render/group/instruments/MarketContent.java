@@ -1,6 +1,6 @@
 package de.linus.prototypeStock.render.group.instruments;
 
-import de.linus.prototypeStock.render.group.genaral.content.ContentArea;
+import de.linus.prototypeStock.render.group.ContentArea;
 
 /**
  * 6/7th of the screen displaying 

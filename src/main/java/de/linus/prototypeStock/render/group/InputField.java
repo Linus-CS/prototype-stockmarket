@@ -1,6 +1,7 @@
 package de.linus.prototypeStock.render.group;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -17,21 +18,34 @@ import de.linus.prototypeStock.render.group.components.MouseInput;
  */
 public abstract class InputField extends Component implements KeyInput, MouseInput {
 
+	/**
+	 * True or false rather if field is currently selected or not.
+	 */
 	protected boolean selected;
+	
+	private String text = new String();
+	private Color textColor = Color.BLACK;
+	private String backText = new String();
+	private Color backTextColor = Color.GRAY;
+	
+	/* Courser render values */
+	private boolean displayCourser;
 	private int courserSpeed = 8;
 	private int courserCounter = 0;
-	private boolean displayCourser;
+	
+	/* Settings */
+	private boolean displayMagnifier = false;
+	private Font font;
+	private Color backColor = Color.WHITE;
+	private Color courserColor = Color.GRAY;
+	private Color magnifierColor = Color.BLACK;
 
 	public InputField(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		setKeyInput(this);
 		setMouseInput(this);
+		font =  new Font("Arial", Font.PLAIN, height - height/9);
 	}
-
-	/**
-	 * Called when a key is typed while field is selected.
-	 */
-	public abstract void onKeyTyped(KeyEvent e);
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -59,11 +73,27 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		selected = true;
 	}
 
+	/**
+	 * Override onKeyTyped instead of this method.
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (selected)
+		if (selected) 
 			this.onKeyTyped(e);
+		
 	}
+	
+	/**
+	 * Called when a key is typed while field is selected.
+	 */
+	public void onKeyTyped(KeyEvent e) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(text);
+		if(font.canDisplay(e.getKeyChar()))
+			builder.append(e.getKeyChar());
+		this.text = builder.toString();
+	}
+
 	
 	@Override
 	public void update() {
@@ -99,11 +129,82 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		this.courserSpeed = courserSpeed;
 	}
 	
+	/**
+	 * Sets rather a magnifier is supposed
+	 * to be displayed on the field or not.
+	 * 
+	 * @param displayMagnifier
+	 */
+	public void setDisplayMagnifier(boolean displayMagnifier) {
+		this.displayMagnifier = displayMagnifier;
+	}
+	
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getBackText() {
+		return backText;
+	}
+
+	public void setBackText(String backText) {
+		this.backText = backText;
+	}
+
+	public void setTextColor(Color textColor) {
+		this.textColor = textColor;
+	}
+
+	public void setBackTextColor(Color backTextColor) {
+		this.backTextColor = backTextColor;
+	}
+
+	public void setBackColor(Color backColor) {
+		this.backColor = backColor;
+	}
+
+	public void setCourserColor(Color courserColor) {
+		this.courserColor = courserColor;
+	}
+
+	public void setMagnifierColor(Color magnifierColor) {
+		this.magnifierColor = magnifierColor;
+	}
+
 	@Override
 	public void render(Graphics g) {
+		/* Draws the background */
+		g.setColor(backColor);
+		g.fillRect(x, y, width, height);
+		
+		g.setFont(font);
+		
+		/* Draws the text*/
+		g.setColor(textColor);
+		g.drawString(text, (int) (x + ((1/100d) * width)), (int) (y + (14/15d) * height));
+		
+		/* Draws the background text if not selected */
+		if(!selected) {
+			g.setColor(backTextColor);
+			g.drawString(backText, (int) (x + ((1/100d) * width)), (int) (y + (14/15d) * height));
+		}
+		
+		/* Draws the courser */
 		if(displayCourser) {
-			g.setColor(Color.GRAY);
-			g.fillRect((int) (x + ((1/100d) * width)), (int) (y + (1/15d) * height), (int) ((1/100d) * width), height - (int) ((2/15d) * height));
+			int courserX = (int) (x + ((1/100d) * width)) + g.getFontMetrics().stringWidth(text);
+			g.setColor(courserColor);
+			g.fillRect(courserX, (int) (y + (1/15d) * height), (int) ((1/100d) * width), height - (int) ((2/15d) * height));
+		}
+		
+		/* Draws the magnifier */
+		if(displayMagnifier) {
+			g.setColor(magnifierColor);
+			g.drawOval(x + width - width/15, y + height/4, height/3, height/3);
+			g.drawLine(x + width - width/15, y + height/2, x + width - width/11, y + 2 * (height/3) + height/25);
 		}
 	}	
 }

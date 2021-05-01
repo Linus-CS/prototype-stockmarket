@@ -1,6 +1,6 @@
 package de.linus.prototypeStock.render.scene;
 
-import de.linus.prototypeStock.render.group.genaral.navigation.Navigation;
+import de.linus.prototypeStock.render.group.navigation.Navigation;
 
 /**
  * Containing all scenes, to manage.

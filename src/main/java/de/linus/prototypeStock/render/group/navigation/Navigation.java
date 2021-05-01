@@ -1,4 +1,4 @@
-package de.linus.prototypeStock.render.group.genaral.navigation;
+package de.linus.prototypeStock.render.group.navigation;
 
 import java.awt.Color;
 import java.awt.Graphics;
