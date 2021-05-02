@@ -65,6 +65,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		if(e.getY() > this.y + this.height)
 			return;
 		
+		/* Specifics if clicked on magnifier */
 		boolean magnifierFlag = e.getX() < x + width - width/11;
 		if(!magnifierFlag)
 			this.search.onSearch(text);
