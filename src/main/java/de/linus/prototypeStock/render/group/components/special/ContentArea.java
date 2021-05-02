@@ -1,4 +1,4 @@
-package de.linus.prototypeStock.render.group;
+package de.linus.prototypeStock.render.group.components.special;
 
 import de.linus.prototypeStock.render.Window;
 import de.linus.prototypeStock.render.group.components.ComponentGroup;

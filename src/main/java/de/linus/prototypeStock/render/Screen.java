@@ -53,7 +53,7 @@ public class Screen extends JPanel{
 		
 		this.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
 				scene.keyTyped(e);
 			}
 		});

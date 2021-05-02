@@ -1,4 +1,4 @@
-package de.linus.prototypeStock.render.group;
+package de.linus.prototypeStock.render.group.components.special;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +22,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	 * True or false rather if field is currently selected or not.
 	 */
 	protected boolean selected;
+	private Search search;
 	
 	private String text = new String();
 	private Color textColor = Color.BLACK;
@@ -44,7 +45,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		super(x, y, width, height);
 		setKeyInput(this);
 		setMouseInput(this);
-		font =  new Font("Arial", Font.PLAIN, height - height/9);
+		font =  new Font("Arial", Font.PLAIN, height - height/3);
 	}
 
 	@Override
@@ -53,23 +54,22 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getX() < this.x) {
-			selected = false;
+		selected = false;
+		
+		if(e.getX() < this.x)
 			return;
-		}
-		if (e.getX() > this.x + this.width) {
-			selected = false;
+		if(e.getX() > this.x + this.width)
 			return;
-		}
-		if (e.getY() < this.y) {
-			selected = false;
+		if(e.getY() < this.y)
 			return;
-		}
-		if (e.getY() > this.y + this.height) {
-			selected = false;
+		if(e.getY() > this.y + this.height)
 			return;
-		}
+		
+		boolean magnifierFlag = e.getX() < x + width - width/11;
+		if(!magnifierFlag)
+			this.search.onSearch(text);
 
+		
 		selected = true;
 	}
 
@@ -80,7 +80,6 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	public void keyTyped(KeyEvent e) {
 		if (selected) 
 			this.onKeyTyped(e);
-		
 	}
 	
 	/**
@@ -89,6 +88,13 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	public void onKeyTyped(KeyEvent e) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(text);
+		
+		if(search != null && e.getKeyCode() == 10) 
+			this.search.onSearch(text);
+		
+		if(builder.length() != 0 && e.getKeyCode() == 8)
+			builder.deleteCharAt(builder.length() - 1);
+		
 		if(font.canDisplay(e.getKeyChar()))
 			builder.append(e.getKeyChar());
 		this.text = builder.toString();
@@ -174,6 +180,10 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	public void setMagnifierColor(Color magnifierColor) {
 		this.magnifierColor = magnifierColor;
 	}
+	
+	public void setSearch(Search search) {
+		this.search = search;
+	}
 
 	@Override
 	public void render(Graphics g) {
@@ -185,12 +195,12 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		
 		/* Draws the text*/
 		g.setColor(textColor);
-		g.drawString(text, (int) (x + ((1/100d) * width)), (int) (y + (14/15d) * height));
+		g.drawString(text, (int) (x + ((1/100d) * width)), (int) (y + (12/15d) * height));
 		
 		/* Draws the background text if not selected */
-		if(!selected) {
+		if(!selected && text.isEmpty()) {
 			g.setColor(backTextColor);
-			g.drawString(backText, (int) (x + ((1/100d) * width)), (int) (y + (14/15d) * height));
+			g.drawString(backText, (int) (x + ((1/100d) * width)), (int) (y + (12/15d) * height));
 		}
 		
 		/* Draws the courser */

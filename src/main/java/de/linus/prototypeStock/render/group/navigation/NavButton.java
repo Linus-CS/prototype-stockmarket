@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
-import de.linus.prototypeStock.render.group.Button;
+import de.linus.prototypeStock.render.group.components.special.Button;
 
 /**
  * Customized button that can be used in the navigation.

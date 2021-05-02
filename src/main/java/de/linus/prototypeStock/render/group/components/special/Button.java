@@ -1,4 +1,4 @@
-package de.linus.prototypeStock.render.group;
+package de.linus.prototypeStock.render.group.components.special;
 
 import java.awt.Color;
 import java.awt.Graphics;
