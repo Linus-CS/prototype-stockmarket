@@ -79,4 +79,13 @@ public class Scene {
 			group.keyTyped(e);
 		}
 	}
+	
+	/**
+	 * Returns all groups added to the current scene.
+	 * 
+	 * @return
+	 */
+	public List<ComponentGroup> getGroups() {
+		return groups;
+	}
  }

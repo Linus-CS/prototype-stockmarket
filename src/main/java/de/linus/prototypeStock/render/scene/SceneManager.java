@@ -16,7 +16,7 @@ public class SceneManager {
 	private final Navigation naviagtion = new Navigation();
 	
 	/* Scenes */
-	public final MarketScene marketScene = new MarketScene();
+	public static final MarketScene marketScene = new MarketScene();
 	
 	public SceneManager() {
 		marketScene.addGroup(naviagtion);
@@ -28,7 +28,7 @@ public class SceneManager {
 	 * 
 	 * @return
 	 */
-	public Scene getStart() {
+	public static Scene getStart() {
 		return marketScene;
 	}
 }

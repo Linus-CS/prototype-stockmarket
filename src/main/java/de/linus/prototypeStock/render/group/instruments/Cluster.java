@@ -35,7 +35,7 @@ public class Cluster extends ComponentGroup {
 		int instrumentHeight = 180;
 		
 		for(int i = 0; i < 20; i++) {
-			instruments.add(new Instrument(instrumentX, instrumentY, instrumentWidth, instrumentHeight));
+			instruments.add(new Instrument("Apple", 20d,instrumentX, instrumentY, instrumentWidth, instrumentHeight));
 			instrumentX += instrumentWidth + offSet;
 			if(instrumentX + instrumentWidth >= this.width) {
 				instrumentX = offSet;

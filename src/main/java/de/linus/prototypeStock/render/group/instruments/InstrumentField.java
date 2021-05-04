@@ -21,6 +21,6 @@ public class InstrumentField extends InputField implements Search{
 	
 	@Override
 	public void onSearch(String text) {
-		System.out.println("Search!");
+
 	}
 }

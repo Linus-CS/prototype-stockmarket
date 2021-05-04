@@ -23,17 +23,17 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	 */
 	protected boolean selected;
 	private Search search;
-	
+
 	private String text = new String();
 	private Color textColor = Color.BLACK;
 	private String backText = new String();
 	private Color backTextColor = Color.GRAY;
-	
+
 	/* Courser render values */
 	private boolean displayCourser;
 	private int courserSpeed = 8;
 	private int courserCounter = 0;
-	
+
 	/* Settings */
 	private boolean displayMagnifier = false;
 	private Font font;
@@ -45,32 +45,31 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		super(x, y, width, height);
 		setKeyInput(this);
 		setMouseInput(this);
-		font =  new Font("Arial", Font.PLAIN, height - height/3);
+		font = new Font("Arial", Font.PLAIN, height - height / 3);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		selected = false;
-		
-		if(e.getX() < this.x)
+
+		if (e.getX() < this.x)
 			return;
-		if(e.getX() > this.x + this.width)
+		if (e.getX() > this.x + this.width)
 			return;
-		if(e.getY() < this.y)
+		if (e.getY() < this.y)
 			return;
-		if(e.getY() > this.y + this.height)
+		if (e.getY() > this.y + this.height)
 			return;
-		
+
 		/* Specifics if clicked on magnifier */
-		boolean magnifierFlag = e.getX() < x + width - width/11;
-		if(!magnifierFlag)
+		boolean magnifierFlag = e.getX() < x + width - width / 11;
+		if (!magnifierFlag)
 			this.search.onSearch(text);
 
-		
 		selected = true;
 	}
 
@@ -79,73 +78,70 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (selected) 
+		if (selected)
 			this.onKeyTyped(e);
 	}
-	
+
 	/**
 	 * Called when a key is typed while field is selected.
 	 */
 	public void onKeyTyped(KeyEvent e) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(text);
-		
-		if(search != null && e.getKeyCode() == 10) 
+
+		if (search != null && e.getKeyCode() == 10)
 			this.search.onSearch(text);
-		
-		if(builder.length() != 0 && e.getKeyCode() == 8)
+
+		if (builder.length() != 0 && e.getKeyCode() == 8)
 			builder.deleteCharAt(builder.length() - 1);
-		
-		if(font.canDisplay(e.getKeyChar()))
+
+		if (font.canDisplay(e.getKeyChar()))
 			builder.append(e.getKeyChar());
 		this.text = builder.toString();
 	}
 
-	
 	@Override
 	public void update() {
-		if(selected)
+		if (selected)
 			updateCursorCounter();
 		else
 			displayCourser = false;
 	}
-	
+
 	/**
-	 * Updates the courserCounter and sets booleans
-	 * to true if courser is supposed to be displayed.
+	 * Updates the courserCounter and sets booleans to true if courser is supposed
+	 * to be displayed.
 	 */
 	private void updateCursorCounter() {
-		if(courserCounter >= courserSpeed)
+		if (courserCounter >= courserSpeed)
 			displayCourser = false;
 		else
 			displayCourser = true;
-		
-		if(courserCounter == 2 * courserSpeed) 
+
+		if (courserCounter == 2 * courserSpeed)
 			courserCounter = 0;
 		else
 			courserCounter++;
 	}
 
 	/**
-	 * Set the speed of the courser
-	 * smaller number faster blink (default: 8	).
+	 * Set the speed of the courser smaller number faster blink (default: 8 ).
 	 * 
 	 * @param courserSpeed
 	 */
 	public void setCourserSpeed(int courserSpeed) {
 		this.courserSpeed = courserSpeed;
 	}
-	
+
 	/**
-	 * Sets rather a magnifier is supposed
-	 * to be displayed on the field or not.
+	 * Sets rather a magnifier is supposed to be displayed on the field or not.
 	 * 
 	 * @param displayMagnifier
 	 */
 	public void setDisplayMagnifier(boolean displayMagnifier) {
 		this.displayMagnifier = displayMagnifier;
 	}
-	
+
 	public String getText() {
 		return text;
 	}
@@ -181,7 +177,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	public void setMagnifierColor(Color magnifierColor) {
 		this.magnifierColor = magnifierColor;
 	}
-	
+
 	public void setSearch(Search search) {
 		this.search = search;
 	}
@@ -191,31 +187,33 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 		/* Draws the background */
 		g.setColor(backColor);
 		g.fillRect(x, y, width, height);
-		
+
 		g.setFont(font);
-		
-		/* Draws the text*/
+
+		/* Draws the text */
 		g.setColor(textColor);
-		g.drawString(text, (int) (x + ((1/100d) * width)), (int) (y + (12/15d) * height));
-		
+		g.drawString(text, (int) (x + ((1 / 100d) * width)), (int) (y + (12 / 15d) * height));
+
 		/* Draws the background text if not selected */
-		if(!selected && text.isEmpty()) {
+		if (!selected && text.isEmpty()) {
 			g.setColor(backTextColor);
-			g.drawString(backText, (int) (x + ((1/100d) * width)), (int) (y + (12/15d) * height));
+			g.drawString(backText, (int) (x + ((1 / 100d) * width)), (int) (y + (12 / 15d) * height));
 		}
-		
+
 		/* Draws the courser */
-		if(displayCourser) {
-			int courserX = (int) (x + ((1/100d) * width)) + g.getFontMetrics().stringWidth(text);
+		if (displayCourser) {
+			int courserX = (int) (x + ((1 / 100d) * width)) + g.getFontMetrics().stringWidth(text);
 			g.setColor(courserColor);
-			g.fillRect(courserX, (int) (y + (1/15d) * height), (int) ((1/100d) * width), height - (int) ((2/15d) * height));
+			g.fillRect(courserX, (int) (y + (1 / 15d) * height), (int) ((1 / 100d) * width),
+					height - (int) ((2 / 15d) * height));
 		}
-		
+
 		/* Draws the magnifier */
-		if(displayMagnifier) {
+		if (displayMagnifier) {
 			g.setColor(magnifierColor);
-			g.drawOval(x + width - width/15, y + height/4, height/3, height/3);
-			g.drawLine(x + width - width/15, y + height/2, x + width - width/11, y + 2 * (height/3) + height/25);
+			g.drawOval(x + width - width / 15, y + height / 4, height / 3, height / 3);
+			g.drawLine(x + width - width / 15, y + height / 2, x + width - width / 11,
+					y + 2 * (height / 3) + height / 25);
 		}
-	}	
+	}
 }

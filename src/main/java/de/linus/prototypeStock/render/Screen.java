@@ -23,7 +23,6 @@ import de.linus.prototypeStock.render.scene.SceneManager;
  */
 public class Screen extends JPanel{
 	
-	private final SceneManager sceneManager = new SceneManager();
 	private Scene scene;
 	
 	/**
@@ -34,7 +33,7 @@ public class Screen extends JPanel{
 		this.setBackground(Color.GRAY);
 		this.setFocusable(true);
 		this.requestFocus();
-		this.scene = sceneManager.getStart();
+		this.scene = SceneManager.getStart();
 		
 		//Mouse click and move handling.
 		this.addMouseListener(new MouseAdapter() {
