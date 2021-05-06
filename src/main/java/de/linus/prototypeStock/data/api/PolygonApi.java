@@ -17,8 +17,14 @@ public class PolygonApi {
 		
 	}
 
-	public static List<String> searchTickers() {
-		TickersDTO tickers = client.getReferenceClient().getSupportedTickersBlocking(new SupportedTickersParametersBuilder().search("AA").tickersPerPage(50).build());
+	/**
+	 * Returns for tickers corresponding to given symbols.
+	 * 
+	 * @param symbols
+	 * @return
+	 */
+	public static List<String> searchTickers(String symbols) {
+		TickersDTO tickers = client.getReferenceClient().getSupportedTickersBlocking(new SupportedTickersParametersBuilder().search(symbols).tickersPerPage(50).build());
 		List<String> tickerNames = new ArrayList<String>();
 		for(TickerDTO ticker : tickers.getTickers()) {
 			tickerNames.add(ticker.getName());

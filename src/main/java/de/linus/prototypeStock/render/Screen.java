@@ -11,8 +11,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+import de.linus.prototypeStock.PrototypeStockmarket;
 import de.linus.prototypeStock.render.scene.Scene;
-import de.linus.prototypeStock.render.scene.SceneManager;
 
 @SuppressWarnings("serial")
 /**
@@ -33,9 +33,9 @@ public class Screen extends JPanel{
 		this.setBackground(Color.GRAY);
 		this.setFocusable(true);
 		this.requestFocus();
-		this.scene = SceneManager.getStart();
+		this.scene = PrototypeStockmarket.getInstance().getSceneManager().getStart();
 		
-		//Mouse click and move handling.
+		/* Mouse click and move handling. */
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

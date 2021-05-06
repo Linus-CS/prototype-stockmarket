@@ -1,8 +1,5 @@
 package de.linus.prototypeStock;
 
-import de.linus.prototypeStock.render.Window;
-import de.linus.prototypeStock.render.resources.Images;
-
 /**
  * Main class.
  * 
@@ -11,8 +8,6 @@ import de.linus.prototypeStock.render.resources.Images;
  */
 public class Main {
 	public static void main(String[] args) {
-//		new PolygonApi();
-		new Images();
-		new Window();
+		PrototypeStockmarket.getInstance();
 	}
 }

@@ -29,13 +29,13 @@ public class Window extends JFrame implements Runnable{
 		this.add(screen);
 		this.setVisible(true);
 		
-		// Render thread executes run method.
+		/* Render thread executes run method. */
 		new Thread(this).start();
 	}
 
 	@Override
 	public void run() {
-		//Simple loop continues to render and update components.
+		/* Simple loop continues to render and update components. */
 		while(true) {
 			screen.getScene().update();
 			screen.repaint();

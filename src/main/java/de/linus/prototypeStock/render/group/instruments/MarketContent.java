@@ -3,8 +3,7 @@ package de.linus.prototypeStock.render.group.instruments;
 import de.linus.prototypeStock.render.group.components.special.ContentArea;
 
 /**
- * 6/7th of the screen displaying 
- * instruments and search bar.
+ * Displaying instruments and search bar.
  * 
  * @author linus
  *
