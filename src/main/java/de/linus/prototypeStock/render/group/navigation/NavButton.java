@@ -19,12 +19,13 @@ public class NavButton extends Button {
 	private String text;
 	private final Font font;
 	private boolean underline;
+	private final Color background = Color.BLACK;
 
 	public NavButton(String text, int y, int height) {
 		super(0, y - (int) (1 / 3f * height), 0, height);
 		this.text = text;
 
-		//Set font and set width to display width.
+		/* Set font and set width to display width. */
 		font = new Font("Arial", Font.BOLD, this.height  - (int) (1 / 3f * height));
 		FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
 		this.width = (int) (font.getStringBounds(text, frc).getWidth());
@@ -33,7 +34,7 @@ public class NavButton extends Button {
 	@Override
 	public void render(Graphics g) {
 		g.setFont(font);
-		g.setColor(Color.WHITE);
+		g.setColor(background);
 		g.drawString(text, x, y + this.height);
 		if (underline)
 			g.fillRect(x, y + this.height + this.height / 10, this.width, this.height/10);

@@ -1,5 +1,7 @@
 package de.linus.prototypeStock.render.group.instruments;
 
+import java.awt.Color;
+
 import de.linus.prototypeStock.render.group.components.special.InputField;
 import de.linus.prototypeStock.render.group.components.special.Search;
 
@@ -17,6 +19,10 @@ public class InstrumentField extends InputField implements Search{
 		setSearch(this);
 		setDisplayMagnifier(true);
 		setBackText("Instrument");
+		setCourserColor(new Color(52, 52, 52));
+		setBackTextColor(new Color(52, 52, 52));
+		setTextColor(Color.black);
+		setBackColor(new Color(137, 137, 137));
 	}
 	
 	@Override

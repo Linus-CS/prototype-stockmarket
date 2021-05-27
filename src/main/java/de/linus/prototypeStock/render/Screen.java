@@ -24,13 +24,14 @@ import de.linus.prototypeStock.render.scene.Scene;
 public class Screen extends JPanel{
 	
 	private Scene scene;
+	private final Color background = new Color(165, 50, 50);
 	
 	/**
 	 * Initialization of multiple settings for JPanel. 
 	 */
 	public Screen() {
 		this.setSize(Window.WIDTH, Window.HEIGHT);
-		this.setBackground(Color.GRAY);
+		this.setBackground(background);
 		this.setFocusable(true);
 		this.requestFocus();
 		this.scene = PrototypeStockmarket.getInstance().getSceneManager().getStart();

@@ -1,6 +1,7 @@
 package de.linus.prototypeStock.render.group.instruments;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import de.linus.prototypeStock.render.group.components.Component;
@@ -16,24 +17,27 @@ import de.linus.prototypeStock.render.group.components.ComponentGroup;
 public class Instrument extends ComponentGroup{
 	
 	private int x, y, width, height;
-	private Color color = new Color(195, 195, 195);
+	private Color background = new Color(88, 88, 88);
+	private Color textColor = Color.BLACK;
+	private final Font font;
 	private String name;
-	private double value;
+	private double price;
 	
 	public Instrument(String name, double value, int x, int y , int width, int height) {
 		this.name = name;
-		this.value = value;
+		this.price = value;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		
+		font = new Font("Arial", Font.BOLD, (int) (1 / 10f * height));
 		
 		/* Background of instrument-box. */
 		this.addComponent(new Component(this.x, this.y, this.width, this.height) {	
 			@Override
 			public void render(Graphics g) {
-				g.setColor(color);
+				g.setColor(background);
 				g.fillRect(x, y, width, height);
 			}
 		});
@@ -42,7 +46,8 @@ public class Instrument extends ComponentGroup{
 		this.addComponent(new Component(this.x + this.height/20, this.y + this.height - this.height/20, this.width, this.height) {
 			@Override
 			public void render(Graphics g) {
-				g.setColor(Color.WHITE);
+				g.setFont(font);
+				g.setColor(textColor);
 				g.drawString(name, x, y);
 			}
 		});
@@ -51,8 +56,8 @@ public class Instrument extends ComponentGroup{
 		this.addComponent(new Component(this.x + this.height/20, this.y + this.height - this.height/5, this.width, this.height) {
 			@Override
 			public void render(Graphics g) {
-				g.setColor(Color.WHITE);
-				g.drawString("Value: " + value, x, y);
+				g.setColor(textColor);
+				g.drawString("Price: " + value + "$", x, y);
 			}
 		});
 		
@@ -66,7 +71,7 @@ public class Instrument extends ComponentGroup{
 		this.y = y;
 	}
 	
-	public void setColor(Color color) {
-		this.color = color;
+	public void setBackground(Color color) {
+		this.background = color;
 	}
 }

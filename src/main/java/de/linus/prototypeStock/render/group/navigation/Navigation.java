@@ -22,6 +22,7 @@ public class Navigation extends ComponentGroup {
 	private List<NavButton> navButtons = new ArrayList<>();
 	private int width = Window.WIDTH;
 	private int height = Window.HEIGHT / 7;
+	private final Color background = new Color(50, 50, 50);
 
 	/**
 	 * Adding main navigation elements.
@@ -38,7 +39,7 @@ public class Navigation extends ComponentGroup {
 		this.addComponent(new Component(0, 0, this.width, this.height) {
 			@Override
 			public void render(Graphics g) {
-				g.setColor(new Color(9, 67, 122));
+				g.setColor(background);
 				g.fillRect(x, y, width, height);
 			}
 		});
