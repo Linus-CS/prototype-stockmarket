@@ -24,7 +24,7 @@ public class Window extends JFrame implements Runnable{
 		this.setSize(WIDTH, HEIGHT);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setIconImage(Images.icon);
+		this.setIconImage(Images.ICON);
 		this.setResizable(false);
 		this.add(screen);
 		this.setVisible(true);

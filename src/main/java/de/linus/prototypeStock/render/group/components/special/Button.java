@@ -1,6 +1,5 @@
 package de.linus.prototypeStock.render.group.components.special;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
@@ -75,7 +74,6 @@ public abstract class Button extends Component implements MouseInput{
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y, width, height);
 	}
 }

@@ -21,21 +21,21 @@ public class Navigation extends ComponentGroup {
 
 	private List<NavButton> navButtons = new ArrayList<>();
 	private int width = Window.WIDTH;
-	private int height = Window.HEIGHT / 7;
+	private int height = Window.HEIGHT / 9;
 	private final Color background = new Color(50, 50, 50);
 
 	/**
 	 * Adding main navigation elements.
 	 */
-	private void addNavElements(int navY) {
-		navButtons.add(new NavButton("Market", navY, this.height / 4));
-		navButtons.add(new NavButton("Portfolio", navY, this.height / 4));
+	private void addNavElements() {
+		navButtons.add(new NavButton("Market", this.height/2, this.height / 2));
+		navButtons.add(new NavButton("Portfolio", this.height/2, this.height / 2));
 	}
 
 	public Navigation() {
-		// Height is 1/7 of the screen (canvas). Width is full width.
+		/* Height is 1/7 of the screen (canvas). Width is full width. */
 
-		// Background (dark blue)
+		/* Background (dark blue) */
 		this.addComponent(new Component(0, 0, this.width, this.height) {
 			@Override
 			public void render(Graphics g) {
@@ -44,16 +44,15 @@ public class Navigation extends ComponentGroup {
 			}
 		});
 		
-		//Logo
-		this.addComponent(new Component(this.height/6, this.height/6, this.height/2, this.height/2) {
+		/* Logo */
+		this.addComponent(new Component(this.height/6, this.height/6, 2 * this.height/3, 2 * this.height/3) {
 			@Override
 			public void render(Graphics g) {
-				g.drawImage(Images.logo, x, y, width, height, null);
+				g.drawImage(Images.LOGO, x, y, width, height, null);
 			}
 		});
 
-		final int navY = this.height - this.height / 4;
-		addNavElements(navY);
+		addNavElements();
 		addNavButtons();
 	}
 
@@ -61,10 +60,10 @@ public class Navigation extends ComponentGroup {
 	 * Places the buttons on their accurate positions.
 	 */
 	private void addNavButtons() {
-		int i = this.width / 100;
+		int i = this.height + this.height/5;
 		for (NavButton navButton : navButtons) {
 			navButton.setX(i);
-			i += this.width / 100 + navButton.getWidth();
+			i += this.width/200 + navButton.getWidth();
 			this.addComponent(navButton);
 		}
 	}

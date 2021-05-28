@@ -14,9 +14,9 @@ import javax.imageio.ImageIO;
  *
  */
 public class Images {
-	public static final Image icon = loadImage("stock_market_icon.jpeg");
-	public static final Image logo = loadImage("stock_market_logo.png");
-	public static final Image search = loadImage("search.png");
+	public static final Image LOGO = loadImage("stock_market_logo.png");
+	public static final Image ICON = loadImage("icon.png");
+	public static final Image SHADOW = loadImage("shadow.png");
 	
 	/**
 	 * Loads images from inside the jar.
