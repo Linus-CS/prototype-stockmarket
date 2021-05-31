@@ -1,6 +1,6 @@
 package de.linus.prototypeStock.render.scene;
 
-import de.linus.prototypeStock.render.group.instruments.MarketContent;
+import de.linus.prototypeStock.render.group.mainscreen.instruments.MarketContent;
 
 /**
  * Scene providing a overview of
@@ -10,7 +10,6 @@ import de.linus.prototypeStock.render.group.instruments.MarketContent;
  *
  */
 public class MarketScene extends Scene{
-
 	public MarketScene() {
 		this.addGroup(new MarketContent());
 	}	

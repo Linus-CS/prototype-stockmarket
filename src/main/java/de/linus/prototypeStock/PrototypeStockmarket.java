@@ -2,7 +2,6 @@ package de.linus.prototypeStock;
 
 import de.linus.prototypeStock.data.api.PolygonApi;
 import de.linus.prototypeStock.render.Window;
-import de.linus.prototypeStock.render.scene.SceneManager;
 
 /**
  * Main singelton class providing access to all instances.
@@ -14,24 +13,14 @@ public class PrototypeStockmarket {
 	
 	private static PrototypeStockmarket instance = null;
 	
-	private final SceneManager sceneManager; 
 	private final Window window;
 	private final PolygonApi polygonApi;
 	
 	private PrototypeStockmarket() {
 		instance = this;
-		sceneManager =  new SceneManager();
 		window = new Window();
 		polygonApi = new PolygonApi();
-	}
-	
-	/**
-	 * Returns sceneManager containing all scenes.
-	 * 
-	 * @return
-	 */
-	public SceneManager getSceneManager() {
-		return sceneManager;
+		
 	}
 	
 	/**

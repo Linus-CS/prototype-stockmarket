@@ -6,16 +6,15 @@ import de.linus.prototypeStock.render.resources.Images;
 
 @SuppressWarnings("serial")
 /**
- * Main render class using java swing.
- * Contains the render Thread.
+ * Main render class using java swing. Contains the render Thread.
  * 
  * @author linus
  * 
  */
-public class Window extends JFrame implements Runnable{
+public class Window extends JFrame implements Runnable {
 
 	public static final int WIDTH = 1600, HEIGHT = 900;
-	private final Screen screen = new Screen();
+	private final Screen screen = Screen.getInstance();
 
 	/**
 	 * Initialization of multiple settings for JFrame.
@@ -28,7 +27,7 @@ public class Window extends JFrame implements Runnable{
 		this.setResizable(false);
 		this.add(screen);
 		this.setVisible(true);
-		
+
 		/* Render thread executes run method. */
 		new Thread(this).start();
 	}
@@ -36,8 +35,9 @@ public class Window extends JFrame implements Runnable{
 	@Override
 	public void run() {
 		/* Simple loop continues to render and update components. */
-		while(true) {
-			screen.getScene().update();
+		while (true) {
+			if (screen.getSceneManager().activeScene != null)
+				screen.getSceneManager().activeScene.update();
 			screen.repaint();
 			try {
 				Thread.sleep(100L);
@@ -46,7 +46,7 @@ public class Window extends JFrame implements Runnable{
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns the screen where all components are displayed.
 	 * 

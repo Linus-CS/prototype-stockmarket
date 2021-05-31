@@ -35,7 +35,6 @@ public abstract class Component implements IComponent {
 		this.keyInput = keyInput;
 	}
 	
-	
 	@Override
 	public void update() {
 	}

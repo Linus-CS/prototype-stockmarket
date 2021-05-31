@@ -17,6 +17,7 @@ public class Images {
 	public static final Image LOGO = loadImage("stock_market_logo.png");
 	public static final Image ICON = loadImage("icon.png");
 	public static final Image SHADOW = loadImage("shadow.png");
+	public static final Image SETTINGS = loadImage("gear.png");
 	
 	/**
 	 * Loads images from inside the jar.

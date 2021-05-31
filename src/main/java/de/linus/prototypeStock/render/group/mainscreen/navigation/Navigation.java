@@ -1,4 +1,4 @@
-package de.linus.prototypeStock.render.group.navigation;
+package de.linus.prototypeStock.render.group.mainscreen.navigation;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -51,6 +51,8 @@ public class Navigation extends ComponentGroup {
 				g.drawImage(Images.LOGO, x, y, width, height, null);
 			}
 		});
+		
+		this.addComponent(new SettingsButton(width - (2 *height/3), height/6, height/3, height/3));
 
 		addNavElements();
 		addNavButtons();
