@@ -24,7 +24,7 @@ public class Screen extends JPanel {
 
 	private final Color background = new Color(165, 50, 50);
 	private static Screen instance = null;
-	private final SceneManager manager; 
+	private final SceneManager manager;
 
 	/**
 	 * Initialization of multiple settings for JPanel.
@@ -41,16 +41,14 @@ public class Screen extends JPanel {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (manager.activeScene != null)
-					manager.activeScene.mouseClicked(e);
+				manager.activeScene.mouseClicked(e);
 			}
 		});
 
 		this.addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				if (manager.activeScene != null)
-					manager.activeScene.mouseMoved(e);
+				manager.activeScene.mouseMoved(e);
 			}
 		});
 
@@ -59,8 +57,7 @@ public class Screen extends JPanel {
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (manager.activeScene != null)
-					manager.activeScene.keyTyped(e);
+				manager.activeScene.keyTyped(e);
 			}
 		});
 	}
@@ -69,10 +66,8 @@ public class Screen extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		if (manager.activeScene != null)
-			manager.activeScene.renderGroups(g);
+		manager.activeScene.renderGroups(g);
 	}
-
 
 	/**
 	 * Returns instance of this class.
@@ -84,7 +79,7 @@ public class Screen extends JPanel {
 			new Screen();
 		return instance;
 	}
-	
+
 	/**
 	 * Returns sceneManager containing all scenes.
 	 * 

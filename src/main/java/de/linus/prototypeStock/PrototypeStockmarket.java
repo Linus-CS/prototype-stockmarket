@@ -20,7 +20,6 @@ public class PrototypeStockmarket {
 		instance = this;
 		window = new Window();
 		polygonApi = new PolygonApi();
-		
 	}
 	
 	/**

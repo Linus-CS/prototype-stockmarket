@@ -17,14 +17,12 @@ public class Cluster extends ComponentGroup {
 	private int y;
 
 	private int width;
-	private int height;
 	
 	private List<Instrument> instruments = new ArrayList<>();
 
-	public Cluster(int y, int width, int height) {
+	public Cluster(int y, int width) {
 		this.y = y;
 		this.width = width;
-		this.height = height;
 		
 		/* Instruments */
 		int offSet = width/80;

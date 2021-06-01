@@ -16,6 +16,7 @@ import de.linus.prototypeStock.render.group.mainscreen.navigation.Navigation;
  */
 public class SceneManager {
 	public Scene activeScene = null;
+	public Scene lastScene = null;
 	
 	/* General componentGroups */
 	private final Navigation naviagtion = new Navigation();
@@ -81,6 +82,7 @@ public class SceneManager {
 	 * @param scene
 	 */
 	public void setScene(Scene scene) {
+		this.lastScene = this.activeScene;
 		this.activeScene = scene;
 	}
 	
@@ -91,5 +93,14 @@ public class SceneManager {
 	 */
 	public Scene getScene() {
 		return activeScene;
+	}
+	
+	/**
+	 * Returns last scene.
+	 * 
+	 * @return
+	 */
+	public Scene getLastScene() {
+		return lastScene;
 	}
 }

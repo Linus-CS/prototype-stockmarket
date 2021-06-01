@@ -36,8 +36,7 @@ public class Window extends JFrame implements Runnable {
 	public void run() {
 		/* Simple loop continues to render and update components. */
 		while (true) {
-			if (screen.getSceneManager().activeScene != null)
-				screen.getSceneManager().activeScene.update();
+			screen.getSceneManager().activeScene.update();
 			screen.repaint();
 			try {
 				Thread.sleep(100L);

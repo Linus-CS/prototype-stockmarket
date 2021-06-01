@@ -1,24 +1,19 @@
 package de.linus.prototypeStock.render.group.settingsscreen;
 
-import java.awt.Graphics;
+import java.awt.Color;
 
 import de.linus.prototypeStock.render.Window;
-import de.linus.prototypeStock.render.group.components.Component;
 import de.linus.prototypeStock.render.group.components.ComponentGroup;
+import de.linus.prototypeStock.render.group.components.special.Label;
 
-public class Settings extends ComponentGroup{
-	
+public class Settings extends ComponentGroup {
+
 	public Settings() {
-		
-		int stringLength = Window.WIDTH/4;
-		
-		this.addComponent(new Component(Window.WIDTH/2 - stringLength, Window.HEIGHT/6, Window.WIDTH/4, Window.HEIGHT/6) {
-			@Override
-			public void render(Graphics g) {
-				g.drawString("Settings", x, y);
-			}
-		});
-		
-		this.addComponent(new ApiKeyField(0, 0, 0,0));
+		Label header = new Label("Settings", Window.WIDTH / 2, Window.HEIGHT / 8, Window.HEIGHT / 10);
+		header.setColor(new Color(52, 52, 52));
+		this.addComponent(header);
+		this.addComponent(new KeyField(Window.WIDTH / 2, Window.HEIGHT / 3, Window.HEIGHT / 3, Window.HEIGHT / 20));
+		this.addComponent(new BackButton((Window.HEIGHT/18)/2, (Window.HEIGHT/20)/2, Window.HEIGHT/18, Window.HEIGHT/20));
+		this.addComponent(new SaveButton(Window.WIDTH/2, 4 * Window.HEIGHT/5, Window.HEIGHT/8, Window.HEIGHT/15));
 	}
 }

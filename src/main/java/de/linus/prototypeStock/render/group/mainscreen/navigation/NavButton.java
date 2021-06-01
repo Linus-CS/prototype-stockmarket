@@ -4,11 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 
 import de.linus.prototypeStock.render.group.components.special.Button;
 import de.linus.prototypeStock.render.resources.Images;
+import de.linus.prototypeStock.render.utils.FontUtils;
 
 /**
  * Customized button that can be used in the navigation.
@@ -30,8 +29,7 @@ public class NavButton extends Button {
 
 		/* Set font and set width to display width. */
 		font = new Font("Montserrat", Font.PLAIN, this.height/2);
-		FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
-		this.width = (int) (font.getStringBounds(text, frc).getWidth());
+		this.width = FontUtils.getStringWidth(text, font);
 		this.width += this.width / 5;
 	}
 

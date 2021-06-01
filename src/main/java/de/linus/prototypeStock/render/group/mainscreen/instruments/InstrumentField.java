@@ -20,7 +20,7 @@ public class InstrumentField extends InputField implements Search{
 		setDisplayMagnifier(true);
 		setBackText("Instrument");
 		setCourserColor(new Color(52, 52, 52));
-		setBackTextColor(new Color(52, 52, 52));
+		setBackTextColor(new Color(88, 88, 88));
 		setTextColor(Color.black);
 		setBackColor(new Color(137, 137, 137));
 	}
