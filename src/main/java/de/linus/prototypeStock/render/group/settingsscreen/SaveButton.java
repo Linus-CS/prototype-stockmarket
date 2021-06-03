@@ -7,6 +7,12 @@ import java.awt.Graphics;
 import de.linus.prototypeStock.render.group.components.special.Button;
 import de.linus.prototypeStock.render.utils.FontUtils;
 
+/**
+ * Button that saves all settings on click.
+ * 
+ * @author Linus
+ *
+ */
 public class SaveButton extends Button {
 
 	private int stringWidth;
@@ -15,6 +21,14 @@ public class SaveButton extends Button {
 	private Color color;
 	private Color textColor;
 
+	/**
+	 * Initializes general settings and values.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public SaveButton(int x, int y, int width, int height) {
 		super(x - width / 2, y, width, height);
 		this.font = FontUtils.getMainFontWithSize(width / 3);

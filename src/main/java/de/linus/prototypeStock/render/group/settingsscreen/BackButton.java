@@ -8,6 +8,12 @@ import de.linus.prototypeStock.render.group.components.special.Button;
 import de.linus.prototypeStock.render.resources.Images;
 import de.linus.prototypeStock.render.scene.SceneManager;
 
+/**
+ * Button in settings returning to the last scene on click.
+ * 
+ * @author Linus
+ *
+ */
 public class BackButton extends Button{
 
 	private Image back = Images.BACK;

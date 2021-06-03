@@ -6,6 +6,12 @@ import de.linus.prototypeStock.render.Window;
 import de.linus.prototypeStock.render.group.components.ComponentGroup;
 import de.linus.prototypeStock.render.group.components.special.Label;
 
+/**
+ * Component group for the settings-scene.
+ * 
+ * @author Linus
+ *
+ */
 public class Settings extends ComponentGroup {
 
 	public Settings() {

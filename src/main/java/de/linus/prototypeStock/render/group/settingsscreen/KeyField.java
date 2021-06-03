@@ -4,6 +4,12 @@ import java.awt.Color;
 
 import de.linus.prototypeStock.render.group.components.special.InputField;
 
+/**
+ * InputField containing the api key for polygon.
+ * 
+ * @author Linus
+ *
+ */
 public class KeyField extends InputField {
 
 	public KeyField(int x, int y, int width, int height) {

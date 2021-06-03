@@ -7,6 +7,12 @@ import java.awt.Graphics;
 import de.linus.prototypeStock.render.group.components.Component;
 import de.linus.prototypeStock.render.utils.FontUtils;
 
+/**
+ * Component that is supposed to display text.
+ * 
+ * @author Linus
+ *
+ */
 public class Label extends Component {
 
 	private String text;
