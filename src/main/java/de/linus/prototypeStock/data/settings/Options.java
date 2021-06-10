@@ -2,17 +2,23 @@ package de.linus.prototypeStock.data.settings;
 
 import java.lang.reflect.Field;
 
-import de.linus.prototypeStock.io.Files;
+import de.linus.prototypeStock.PrototypeStockmarket;
+import de.linus.prototypeStock.io.FileSystem;
 
 public class Options {
+
+	private PrototypeStockmarket protypeStock = PrototypeStockmarket.getInstance();
+	private FileSystem fileSystem = protypeStock.getFileSystem();
+
 	@Save
-	public static String key = Files.readKey();
-	
-	public static void save() {
-		for(Field f : Options.class.getDeclaredFields()) {
-			if(f.isAnnotationPresent(Save.class)) {
+	public String key = fileSystem.readOption("key");
+
+	public void save() {
+		for (Field f : Options.class.getDeclaredFields()) {
+			if (f.isAnnotationPresent(Save.class)) {
 				try {
-					Files.writeOption(f.getName(), (String) f.get(null));
+					fileSystem.writeOption(f.getName(), (String) f.get(null));
+
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
@@ -20,5 +26,6 @@ public class Options {
 				}
 			}
 		}
+		fileSystem.writingJsonFiles();
 	}
 }
