@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import de.linus.prototypeStock.PrototypeStockmarket;
 import de.linus.prototypeStock.render.group.components.special.Button;
 import de.linus.prototypeStock.render.utils.FontUtils;
 
@@ -48,6 +49,9 @@ public class SaveButton extends Button {
 
 	@Override
 	public void onClick() {
+		PrototypeStockmarket.getInstance().getOptions().key = ((Settings) parent).keyFromField();
+		PrototypeStockmarket.getInstance().getOptions().save();
+		System.out.println("success");
 	}
 
 	@Override

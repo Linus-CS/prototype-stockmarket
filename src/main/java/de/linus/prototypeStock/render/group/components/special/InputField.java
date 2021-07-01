@@ -3,8 +3,13 @@ package de.linus.prototypeStock.render.group.components.special;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import de.linus.prototypeStock.render.group.components.Component;
 import de.linus.prototypeStock.render.group.components.KeyInput;
@@ -88,6 +93,19 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	public void onKeyTyped(KeyEvent e) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(text);
+		
+		if(e.getKeyCode() == 86 && e.isControlDown()) {
+			try {
+				builder.append((String) Toolkit.getDefaultToolkit()
+				        .getSystemClipboard().getData(DataFlavor.stringFlavor));
+			} catch (HeadlessException e1) {
+				e1.printStackTrace();
+			} catch (UnsupportedFlavorException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 
 		if (search != null && e.getKeyCode() == 10)
 			this.search.onSearch(text);

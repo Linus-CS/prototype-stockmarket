@@ -77,6 +77,7 @@ public class ComponentGroup {
 	 * @param component
 	 */
 	public void addComponent(Component component) {
+		component.setParent(this);
 		this.components.add(component);
 	}
 	

@@ -7,6 +7,8 @@ package de.linus.prototypeStock.render.group.components;
  *
  */
 public abstract class Component implements IComponent {
+	
+	protected ComponentGroup parent;
 	protected int x, y, width, height;
 
 	private MouseInput mouseInput;
@@ -33,6 +35,10 @@ public abstract class Component implements IComponent {
 	
 	public void setKeyInput(KeyInput keyInput) {
 		this.keyInput = keyInput;
+	}
+	
+	public void setParent(ComponentGroup parent) {
+		this.parent = parent;
 	}
 	
 	@Override
