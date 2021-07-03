@@ -14,6 +14,7 @@ import java.io.IOException;
 import de.linus.prototypeStock.render.group.components.Component;
 import de.linus.prototypeStock.render.group.components.KeyInput;
 import de.linus.prototypeStock.render.group.components.MouseInput;
+import de.linus.prototypeStock.render.utils.FontUtils;
 
 /**
  * Component that acts on key input.
@@ -30,13 +31,17 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	private Search search;
 
 	private String text = new String();
+	private String displayText = new String();
 	private Color textColor = Color.BLACK;
 	private String backText = new String();
 	private Color backTextColor = Color.GRAY;
 
 	/* Courser render values */
 	private boolean displayCourser;
-	private int courserSpeed = 8;
+	/**
+	 * Time until courser appears again.
+	 */
+	private int courserSpeed = 40;
 	private int courserCounter = 0;
 
 	/* Settings */
@@ -72,7 +77,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 
 		/* Specifics if clicked on magnifier */
 		boolean magnifierFlag = e.getX() < x + width - width / 11;
-		if (!magnifierFlag)
+		if (!magnifierFlag && displayMagnifier)
 			this.search.onSearch(text);
 
 		selected = true;
@@ -93,11 +98,12 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 	public void onKeyTyped(KeyEvent e) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(text);
-		
-		if(e.getKeyCode() == 86 && e.isControlDown()) {
+
+		/* Strg + V to paste */
+		if (e.getKeyCode() == 86 && e.isControlDown()) {
 			try {
-				builder.append((String) Toolkit.getDefaultToolkit()
-				        .getSystemClipboard().getData(DataFlavor.stringFlavor));
+				builder.append(
+						(String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor));
 			} catch (HeadlessException e1) {
 				e1.printStackTrace();
 			} catch (UnsupportedFlavorException e1) {
@@ -107,15 +113,32 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 			}
 		}
 
+		/* Enter to search */
 		if (search != null && e.getKeyCode() == 10)
 			this.search.onSearch(text);
 
+		/* Back to remove one char */
 		if (builder.length() != 0 && e.getKeyCode() == 8)
 			builder.deleteCharAt(builder.length() - 1);
 
 		if (font.canDisplay(e.getKeyChar()))
 			builder.append(e.getKeyChar());
 		this.text = builder.toString();
+		setDisplayText();
+	}
+
+	/**
+	 * Sets the string that is actually displayed on the field accordingly to the
+	 * width of the field.
+	 */
+	private void setDisplayText() {
+		this.displayText = this.text;
+		double maxWidth = this.width - this.width / 40;
+		maxWidth -= displayMagnifier ? 2 * width / 15 : 0;
+				
+		while (FontUtils.getStringWidth(this.displayText, font) >= maxWidth) {
+			this.displayText = this.displayText.substring(1);
+		}
 	}
 
 	@Override
@@ -166,6 +189,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 
 	public void setText(String text) {
 		this.text = text;
+		setDisplayText();
 	}
 
 	public String getBackText() {
@@ -210,7 +234,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 
 		/* Draws the text */
 		g.setColor(textColor);
-		g.drawString(text, (int) (x + ((1 / 100d) * width)), (int) (y + (12 / 15d) * height));
+		g.drawString(displayText, (int) (x + ((1 / 100d) * width)), (int) (y + (12 / 15d) * height));
 
 		/* Draws the background text if not selected */
 		if (!selected && text.isEmpty()) {
@@ -220,7 +244,7 @@ public abstract class InputField extends Component implements KeyInput, MouseInp
 
 		/* Draws the courser */
 		if (displayCourser) {
-			int courserX = (int) (x + ((1 / 100d) * width)) + g.getFontMetrics().stringWidth(text);
+			int courserX = (int) (x + ((1 / 100d) * width)) + g.getFontMetrics().stringWidth(displayText);
 			g.setColor(courserColor);
 			g.fillRect(courserX, (int) (y + (1 / 15d) * height), (int) ((1 / 100d) * width),
 					height - (int) ((2 / 15d) * height));

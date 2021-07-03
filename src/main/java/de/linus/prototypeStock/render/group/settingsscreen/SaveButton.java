@@ -51,7 +51,6 @@ public class SaveButton extends Button {
 	public void onClick() {
 		PrototypeStockmarket.getInstance().getOptions().key = ((Settings) parent).keyFromField();
 		PrototypeStockmarket.getInstance().getOptions().save();
-		System.out.println("success");
 	}
 
 	@Override

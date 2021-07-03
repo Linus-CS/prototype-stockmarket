@@ -39,7 +39,7 @@ public class Window extends JFrame implements Runnable {
 			screen.getSceneManager().activeScene.update();
 			screen.repaint();
 			try {
-				Thread.sleep(100L);
+				Thread.sleep(10L);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

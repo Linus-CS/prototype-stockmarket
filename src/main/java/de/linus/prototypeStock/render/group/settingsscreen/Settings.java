@@ -14,13 +14,13 @@ import de.linus.prototypeStock.render.group.components.special.Label;
  */
 public class Settings extends ComponentGroup {
 	
-	KeyField keyField;
+	private KeyField keyField;
 
 	public Settings() {
 		Label header = new Label("Settings", Window.WIDTH / 2, Window.HEIGHT / 8, Window.HEIGHT / 10);
 		header.setColor(new Color(52, 52, 52));
 		this.addComponent(header);
-		this.addComponent((keyField = new KeyField(Window.WIDTH / 2, Window.HEIGHT / 3, Window.HEIGHT / 3, Window.HEIGHT / 20)));
+		this.addComponent((keyField = new KeyField(Window.WIDTH / 2, Window.HEIGHT / 3, 3 * Window.HEIGHT / 5 + Window.HEIGHT / 32, Window.HEIGHT / 20)));
 		this.addComponent(new BackButton((Window.HEIGHT/18)/2, (Window.HEIGHT/20)/2, Window.HEIGHT/18, Window.HEIGHT/20));
 		this.addComponent(new SaveButton(Window.WIDTH/2, 4 * Window.HEIGHT/5, Window.HEIGHT/8, Window.HEIGHT/15));
 	}
